@@ -1,0 +1,11 @@
+# Solidworks Temporary Files
+# Created while files are open for editing
+
+/EDGEVideo
+/Kinect_Matlab
+/myCVdataFolder
+*.oni
+*.jpg
+*.mat
+
+MachineLearning/WindowDiscriminant/*.csv
