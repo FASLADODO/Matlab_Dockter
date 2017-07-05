@@ -1,0 +1,48 @@
+function [histo1,histo2,xmean,ymean,xstd,ystd] = MonteCarlo(N)
+clear A
+A=zeros(N,1);
+B=zeros(N,1);
+ND=25.0;
+dstd=0.1214;
+sstd1=0.00477;
+sstd2=0.00878;
+sstd3=0.01467;
+sstd4=0.00904;
+d=(randn(N,1)*dstd)+79.2;
+Y1=(randn(N,1)*sstd1)+15.16332;
+Y2=(randn(N,1)*sstd2)+58.23686;
+Y3=(randn(N,1)*sstd3)+265.8588;
+Y4=(randn(N,1)*sstd4)+309.6434;
+for j=1:N
+    Y=[Y1(j), Y2(j),Y3(j),Y4(j)];
+    X=[ND,ND+d(j),ND+d(j),ND];
+    xbar = (1/numel(X))*sum(X);
+    ybar = (1/numel(Y))*sum(Y);
+    u = X-xbar;
+    v = Y-ybar;
+    u2 = sum(u.*u);
+    uv = sum(u.*v);
+    u3 = sum(u.*u.*u);
+    uv2 = sum(u.*v.*v);
+    v2 = sum(v.*v);
+    v3 = sum(v.*v.*v);
+    vu2 = sum(v.*u.*u);
+    syms uc vc;
+    f(1) = uc*u2+vc*uv-(1/2)*(u3+uv2);
+    f(2) = vc*v2+uc*uv-(1/2)*(v3+vu2);
+    [uc,vc] = solve(f(1), f(2));
+    xc=vpa(uc+xbar);
+    yc=vpa(vc+ybar);
+    A(j,1)=xc;
+    B(j,1)=yc;
+end
+histo1=hist(A,50);
+histo2=hist(B,50);
+xmean=mean(A);
+ymean=mean(B);
+xstd=std(A);
+ystd=std(B);
+
+
+
+

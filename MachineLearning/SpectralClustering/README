@@ -1,0 +1,12 @@
+This directory contains the code for Normalized Cut
+and the nystromized version of it.
+
+The main linear algebra code is in ncut.m and nystrom_ncut.m
+To use these engines, we use the drivers in ncut_driver and nystrom_driver.
+
+An example of their use is given in threegaussexample.m
+
+It constructs a mixture of three gaussians and seperated them out using the ncut algorithm.
+
+Another example is colorimageexample.m
+which segments an image based on the cues of color and proximity.

@@ -1,0 +1,55 @@
+%% Read in a bunch of files from a given directory
+
+% target dir where data lives (assume only data files have extension myExt)
+dataDir = [pwd '/myCVdataFolder/']
+myExt = '.txt';  % assume data files have this extension
+
+% array of fileInof structs
+filesInfo = dir(dataDir); 
+
+%remove directories
+filesInfo = filesInfo(~[filesInfo.isdir])
+
+% get list of filenames to open
+fileList = {};  
+for k=1:length(filesInfo)
+    % if it matches extension, save it.
+    if strfind(filesInfo(k).name, myExt)
+        fileList{end+1} = [  filesInfo(k).name]
+    end
+end
+
+%%
+
+% Load in numeric data and plot it
+allData = [];
+data = {};
+for i = 1:length(fileList)
+   data{i} = load([dataDir fileList{i}]);
+   size(data{i})
+   figure
+   plot(data{i})
+   title(['Filename: ' fileList{i}])
+   xlabel('sample')
+   ylabel('values')
+   allData = [allData; data{i}]; % concat all data
+    
+end
+
+%compute overall metrics
+disp('Ove
+mean(allData)
+
+
+% Use this to sort if desired...
+%[junk, sortorder] = sort([fileList.datenum]);
+%fileList = fileList(sortorder); %list is now in ascending date order
+
+%% use this to load in mixed numeric AND text data via text scan
+%numfiles = numel(fileList);
+%In = cell(numfiles,1);
+% for ii = 1:numfiles
+%    fid = fopen(fileList(ii).name);
+%    In{ii} = textscan(fid, '%s', 'delimiter', ';');
+%    fclose(fid);
+% end

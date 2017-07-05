@@ -7,5 +7,10 @@
 *.oni
 *.jpg
 *.mat
+*.png
+*.jpg
+*.pdf
+*.fig
+
 
 MachineLearning/WindowDiscriminant/*.csv

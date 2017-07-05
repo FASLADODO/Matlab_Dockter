@@ -1,0 +1,11 @@
+function[eigen,zeero]=StateSpaceSat(timestep)
+F=[0,1,0,0;-1600,-2.3,1600,2.3;0,0,0,1;3200,4.6,-3200,-4.6];
+G=[0;0.5;0;0];
+H=[0,0,1,0];
+J=0;
+sys=ss(F,G,H,J);
+t=0:timestep:1;
+y=impulse(sys,t);
+plot(t,y)
+eigen=eig(F);
+zeero=tzero(F,G,H,J);

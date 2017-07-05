@@ -1,0 +1,11 @@
+function K = GridStiff(theta,E,L,I,G,J)
+C=cosd(theta);
+S=sind(theta);
+M1=(12*E*I)/(L^3);
+M2=(6*E*I)/(L^2);
+M3=(G*J)/L;
+M4=(4*E*I)/L;
+M5=(2*E*I)/L;
+KL=[M1,0,M2,-M1,0,M2;0,M3,0,0,-M3,0;M2,0,M4,-M2,0,M5;-M1,0,-M2,M1,0,-M2;0,-M3,0,0,M3,0;M2,0,M5,-M2,0,M4];
+T=[1,0,0,0,0,0;0,C,S,0,0,0;0,-S,C,0,0,0;0,0,0,1,0,0;0,0,0,0,C,S;0,0,0,0,-S,C];
+K=transpose(T)*KL*T;
