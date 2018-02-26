@@ -6,10 +6,10 @@ function [layer] = NN_Layer(inputs, outputs, activation)
     layer.scale = 0.001;
 
     %initialize weights
-    layer.weights = rand(outputs,inputs)*layer.scale;
+    layer.weights = (rand(outputs,inputs)-0.5)*2.0*layer.scale;
     
     %initialize biases (rand, zeros)
-    layer.biases = rand(outputs,1)*layer.scale;
+    layer.biases = (rand(outputs,1)-0.5)*2.0*layer.scale;
     
     %activation functions
     if( strcmp(activation,'relu') == 1)
